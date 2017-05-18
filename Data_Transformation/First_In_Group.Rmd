@@ -1,0 +1,57 @@
+---
+title: "IsFirstInGroup"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(cplm)
+library(CASdatasets)
+library(dplyr)
+```
+
+## R Markdown
+
+This function allows you to flag the first record in a group. You will need to order the data and then run the function.
+
+
+```{r}
+data("freMTPL2sev")
+freMTPL2sev <- freMTPL2sev[order(freMTPL2sev$IDpol, freMTPL2sev$ClaimAmount),]
+
+IsFirstInRun <- function(x,...) {
+  lengthX <- length(x) 
+  
+  if (lengthX == 0) {
+    return(logical(0))
+  }
+  
+  retVal <- c(TRUE, x[-1] != x[-lengthX])
+  
+  for(arg in list(...)) {
+    stopifnot(lengthX == length(arg))
+    retVal | c(TRUE, arg[-1] != arg(-lengthX))
+  }
+  
+  if(any(missing<-is.na(retVal))) {
+    retVal[missing] <- TRUE
+  }
+  
+  retVal
+}
+
+freMTPL2sev$first_pol_ind <- IsFirstInRun(x = freMTPL2sev$IDpol)
+
+head(freMTPL2sev)
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
