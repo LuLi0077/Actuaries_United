@@ -3,7 +3,7 @@
 This is intended to collect useful functions and features in insurance analytics so:
 
 * modelers do not need to reinvent the wheel;
-* it helps speeding up the data-to-action process;
+* it helps speed up the data-to-action process;
 * we can all share experiences and best practices. 
 
 An initial structure of the folders is here:
