@@ -1,22 +1,21 @@
----
-title: "One-way plot"
----
-  
+# One-way plot   
+
 Inputs:
-  dataset - the dataset you would like to explore
-  x - the variable you would like to plot on x-axis
-  y - the variable you would like to plot on y-axis in form of line plot, e.g. target
-  weight - the exposure variable fits into the bar plot, if none entered, default to 1
+* dataset - the dataset you would like to explore  
+* x - the variable you would like to plot on x-axis  
+* y - the variable you would like to plot on y-axis in form of line plot, e.g. target  
+* weight - the exposure variable fits into the bar plot, if none entered, default to 1  
   
-Returnn:
-  1. A summarized data frame contains Factor, SumWeight, SumActual and AverageActual.
-  2. One-way plot of the variable. 
+Return:
+* A summarized data frame contains Factor, SumWeight, SumActual and AverageActual.
+* One-way plot of the variable. 
 
 ```{r}
 # Required packages
 library(ggplot2)
 library(data.table)
 ```
+
 
 ## Main Function
 
