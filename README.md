@@ -9,7 +9,7 @@ This is intended to collect useful functions and features in insurance analytics
 An initial structure of the folders is here:
 
 * Data transformation
-* Data visulization
+* Data visualization
 * Data exploration
 * Feature generation
 * Feature selection
