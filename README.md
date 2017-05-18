@@ -20,7 +20,7 @@ An initial structure of the folders is here:
 * Model validation
 * FAQ 
 
-More detials are included in the `README.md` in each subfolder. Some of these modules can be used across different areas of insurance practices (e.g. pricing, reserving, claim etc.), some might be more function specific. We might restructure the folders to reflect that. 
+More details are included in the `README.md` in each subfolder. Some of these modules can be used across different areas of insurance practices (e.g. pricing, reserving, claim etc.), some might be more functional specific. We might restructure the folders to reflect that. 
 
 General rules of everything included in this repo:
 * only open source softwares are used;
