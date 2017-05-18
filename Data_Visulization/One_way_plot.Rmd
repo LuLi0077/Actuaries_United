@@ -1,0 +1,66 @@
+---
+title: "One-way plot"
+---
+  
+Inputs:
+  dataset - the dataset you would like to explore
+  x - the variable you would like to plot on x-axis
+  y - the variable you would like to plot on y-axis in form of line plot, e.g. target
+  weight - the exposure variable fits into the bar plot, if none entered, default to 1
+  
+Returnn:
+  1. A summarized data frame contains Factor, SumWeight, SumActual and AverageActual.
+  2. One-way plot of the variable. 
+
+```{r}
+# Required packages
+library(ggplot2)
+library(data.table)
+```
+
+## Main Function
+
+```{r}
+onewayplot <- function(dataset, x, y, weight=NULL)
+{
+  Weight = ifelse(is.null(weight), 1, dataset[,weight])
+  modeldata <- data.frame(Weight = Weight,
+                          Actual = dataset[ ,y],
+                          Factor = as.factor(dataset[ ,x]))
+    
+  dframe <- as.data.frame(data.table(modeldata)[ ,.(SumWeight = sum(Weight),
+                                                    SumActual = sum(Actual),
+                                                    AverageActual = sum(Actual)/sum(Weight)),
+                                                    by = Factor])
+    
+  dframe <- dframe[order(dframe$Factor), ]
+  dframe.melt <- melt(dframe [, c(1, 4)], id = c("Factor"))
+  weight_max  <- max(dframe$SumWeight)
+  resp_max    <- max(dframe.melt$value)
+    
+  plot1 <- ggplot(dframe, aes(x=Factor, y=SumWeight, group = 1)) +
+             geom_bar(stat = "identity", aes(x = Factor, y = SumWeight*0.5*(resp_max)/(weight_max)),
+                                             col = "black", fill = "#9EB9D4") +
+             geom_line(data=dframe.melt, aes(x = Factor, y = value, color = variable, group = variable)) +
+             scale_colour_manual(values = c("red")) +
+             theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+             labs(title = paste("Oneway","-",x), x = "Values", y = "Target" )
+    
+  return(list(dframe=dframe, plot_table = plot1))
+}
+```
+
+## Example
+
+```{r}
+# Borrowing an insurance dataset from cplm package
+library(cplm)
+
+dataset <- cplm::AutoClaim
+dataset$claim = as.numeric(dataset$CLM_FLAG)-1
+```
+
+```{r}
+onewayplot(dataset, "AGE", "claim")
+onewayplot(dataset, "CAR_TYPE", "claim")
+```
