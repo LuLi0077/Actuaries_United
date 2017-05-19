@@ -28,3 +28,9 @@ General rules of everything included in this repo:
 * multiple implementations might be available;
 * approaches and examples are insurance specific.
 
+
+## Resources
+
+* [scikit-learn](https://github.com/scikit-learn/scikit-learn): a Python module for machine learning built on top of SciPy
+* [h2o](https://github.com/h2oai/h2o-2): fast statistical, machine learning & math runtime for bigdata
+* [xgboost](https://github.com/dmlc/xgboost): scalable, portable and distributed gradient boosting (GBDT, GBRT or GBM) library, for Python, R, Java, Scala, C++ and more
